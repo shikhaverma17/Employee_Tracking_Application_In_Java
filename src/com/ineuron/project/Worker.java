@@ -1,5 +1,6 @@
 package com.ineuron.project;
 
-public class Worker {
-
+public class Worker
+{
+	
 }
