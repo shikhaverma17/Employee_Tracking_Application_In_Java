@@ -14,14 +14,12 @@ import java.util.Properties;
 public class JDBC_Util
 {
 	public Connection conn=null;
-<<<<<<< HEAD
-=======
+
 	static
 	{
 		System.out.println("class is loading.....");
 	}
 
->>>>>>> 8afbe7483ee38f9a2c09fd60ba5860af877dce27
 	private JDBC_Util() 
 	{
 		System.out.println("Constructor is called.....");
