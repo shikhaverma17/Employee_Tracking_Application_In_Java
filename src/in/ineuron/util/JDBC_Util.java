@@ -9,12 +9,12 @@ public class JDBC_Util
 	public Connection conn=null;
 	static
 	{
-		
+		System.out.println("class is loading.....");
 	}
 
 	private JDBC_Util() 
 	{
-		
+		System.out.println("Constructor is called.....");
 	}
 	
 	public Connection getJDBCConnection()
