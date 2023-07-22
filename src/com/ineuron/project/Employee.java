@@ -9,15 +9,6 @@ public class Employee
 	private String emp_name;
 	private String project_name;
 	private Address address;
-	
-	
-	public Employee(Integer emp_id, String emp_name, String project_name, Address address) {
-		super();
-		this.emp_id = emp_id;
-		this.emp_name = emp_name;
-		this.project_name = project_name;
-		this.address = address;
-	}
 	public Integer getEmp_id() {
 		return emp_id;
 	}
@@ -42,19 +33,11 @@ public class Employee
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
-	void register()
-	{
-		Scanner scan= new Scanner(System.in);
-		System.out.println("Please, enter your details:");
-		System.out.println("Enter your Name::");
-		emp_name=scan.next();
-		System.out.println("Enter your Project Name::");
-		project_name=scan.next();
-		System.out.println("Enter your State::" +address.getState());
-		System.out.println("Enter your City::" +address.getCity());
-		System.out.println("Enter your Street::" +address.getStreet());
-		System.out.println("Enter your ZipCode::" +address.getZipCode());
+	@Override
+	public String toString() {
+		return "Employee [emp_id=" + emp_id + ", emp_name=" + emp_name + ", project_name=" + project_name + ", address="
+				+ address + "]";
 	}
+	
 	
 }
