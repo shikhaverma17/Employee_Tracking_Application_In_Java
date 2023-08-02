@@ -32,7 +32,7 @@ public class JDBC_Util
     	
     	   	
     	Properties props=new Properties();
-    	FileInputStream fis=new FileInputStream("");
+    	FileInputStream fis=new FileInputStream("C:\\Users\\Sid\\Desktop\\Java_learning\\GitRepos\\IneuronAssignments\\Employee_Tracking_Application_In_Java\\application.properties");
     	props.load(fis);
     	
     	
@@ -43,6 +43,7 @@ public class JDBC_Util
     	
     	try {
 			conn=DriverManager.getConnection(url, user, passward);
+			System.out.println("connection established succesfully...");
 			if(conn!=null)
 			{
 				return conn;

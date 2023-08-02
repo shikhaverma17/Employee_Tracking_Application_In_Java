@@ -1,39 +1,24 @@
 package com.ineuron.project;
 
-import java.util.Scanner;
 
-
-public class Worker 
+public class Worker extends Employee
 {
-	String login_time;
+	String shift_time;
+	String status;
 	
-	public static void main(String args[])
-	{
-	    Scanner scan =new Scanner(System.in);
-	    int choice;
-		//Manager manager= new Manager();
-		Address address =new Address("xyz","Jaipur","Rajisthan","11234");
-		//Employee employee=new Employee(101, "Shikha","xyz", address);
-		//System.out.println(employee);
-		
-//		System.out.println("Please,Select your Domain:");
-//		System.out.println("1.Manager");
-//		System.out.println("2.Employee");
-//		choice=scan.nextInt();
-//		
-//		if(choice==1)
-//		{
-//			
-//		}
-//		else if(choice==2)
-//		{
-//			
-//		}
-//		else
-//		{
-//			System.out.println("Select valid option");
-//			main(args);
-//		}
-//		
+	
+	public String getShift_time() {
+		return shift_time;
 	}
+	public void setShift_time(String shift_time) {
+		this.shift_time = shift_time;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
 }
