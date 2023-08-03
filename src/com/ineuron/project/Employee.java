@@ -50,9 +50,8 @@ public class Employee
 				
 				System.out.println(eid + "\t" + ename + "\t" + state
 						+ "\t" + street + "\t" + city + "\t" + zipcode 
-						+ "\t" + etype + "\t" + depttype );
-				
-			}
+						+ "\t" + etype + "\t" + depttype );				
+				}
 			}
 			else
 			{
@@ -60,36 +59,28 @@ public class Employee
 			}
 			
 		}
-			
-			//catch (ClassNotFoundException ce){
-			//ce.printStackTrace();
-			//}
-					catch(SQLException se)
-					{
-						se.printStackTrace();
+		
+		catch(SQLException se)
+			{
+				se.printStackTrace();
 						}
-					catch(Exception e)
+		catch(Exception e)
 					{
 						e.printStackTrace();
 						}
 					
-					finally
-					{
-						//closing the resources
-								if (connection!=null)
-									{
-										try
-											{
-											connection.close();
-											System.out.println("Connection closed...");
-											}
-										catch (SQLException se)
-											{
-												se.printStackTrace();
-											}
-										} 
-								}
-			
+		finally
+			{
+				//closing the resources
+				try
+				{
+					JDBC_Util.closeConnection(resultSet, null, statement, connection);
+						}
+				catch (Exception se)
+				{
+					se.printStackTrace();
+						}
+				}			
 	}
 	
 	public Integer getEmp_id() {
