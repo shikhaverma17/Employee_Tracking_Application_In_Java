@@ -13,46 +13,48 @@ import java.util.Properties;
 
 public class JDBC_Util
 {
-	public Connection conn=null;
-
-	static
-	{
-		System.out.println("class is loading.....");
+	
+	static {
+		// Step1: loading and register the Driver
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println(" JDBC_Util class is loading.....");
+		} catch (ClassNotFoundException ce) {
+			ce.printStackTrace();
+		}
 	}
 	private JDBC_Util() 
 	{
 		System.out.println("Constructor is called.....");
 	}
 	
-	public Connection getJDBCConnection() throws IOException
+	public static Connection getJDBCConnection() throws IOException
 	{
-		Connection conn=null;
-    	ResultSet resultset=null;
-    	PreparedStatement pstmt=null;
-    	
-    	   	
-    	Properties props=new Properties();
+		Connection conn = null;
+	
+    	try
+    	{
+    	Properties properties=new Properties();
     	FileInputStream fis=new FileInputStream("C:\\Users\\Sid\\Desktop\\Java_learning\\GitRepos\\IneuronAssignments\\Employee_Tracking_Application_In_Java\\application.properties");
-    	props.load(fis);
+    	properties.load(fis);
+    
     	
+    	String url = properties.getProperty("url") ;
+		String userName = properties.getProperty("username");
+		String passWord = properties.getProperty("password");
     	
-    	String url=props.getProperty("url");
-    	String user=props.getProperty("user");
-    	String passward=props.getProperty("passward");
-    	
-    	
-    	try {
-			conn=DriverManager.getConnection(url, user, passward);
-			System.out.println("connection established succesfully...");
-			if(conn!=null)
+		// Step2. Establish the Connection
+		conn = DriverManager.getConnection(url, userName, passWord);
+		System.out.println(" CONNECTION object created...connection established succesfully...");
+		if(conn!=null)
 			{
 				return conn;
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} 
+    	catch (Exception e) {
 			e.printStackTrace();
-		}
-  
+		} 
+    	
     	return conn;
 	}
 	
@@ -62,17 +64,17 @@ public class JDBC_Util
 			{
      		try {
 					resultset.close();
+					System.out.println("resultset closed succesfully...");					
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}  
 			}
-     	if(resultset!=null)
+     	if(stmt!=null)
 			{
      		try {
-					resultset.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
+     			stmt.close();
+     			System.out.println("Statement closed succesfully...");
+				} catch (SQLException e) {	
 					e.printStackTrace();
 				}  
 			}	
@@ -80,8 +82,9 @@ public class JDBC_Util
 			{
      		try {
 					pstmt.close();
+					System.out.println("PreparedStatement closed succesfully...");
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
+				
 					e.printStackTrace();
 				}  
 			}
@@ -90,6 +93,7 @@ public class JDBC_Util
               try 
      		   {
 				     conn.close();
+				     System.out.println("connection closed succesfully...");
 				} 
      		    catch (SQLException e)
      		    {
