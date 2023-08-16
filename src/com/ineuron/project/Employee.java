@@ -15,7 +15,100 @@ public class Employee
 	private String emp_name;
 	private String project_name;
 	private Address address;
+	private String emp_type;
 	
+	Employee()
+	{
+		
+	}
+	
+	Employee(String ename, Address add, String etype)
+	{
+		this.emp_name = ename;
+		this.address = add;
+		this.emp_type = etype;
+	}
+
+	public void registerEmployee()
+	{
+		Connection connection = null;
+		PreparedStatement pst = null;
+		ResultSet resultSet = null;
+		Scanner s1 = null;
+		String s01 = null;
+		String s2 = null;
+		String s3 = null;
+		String s4 = null;
+		String s5 = null;
+		String s6 = null;
+		
+		try 
+		{
+			connection = JDBC_Util.getJDBCConnection();			
+			if(connection != null)
+			{
+				//Step3. Create Preparedstatement Object and send the query
+				String sqlEmpInsertQuery
+				= "insert into employee (`ename`,`state`,`street`,`city`,`zipcode`,`etype`) values(?,?,?,?,?,?) ";
+				System.out.println("sql query iniciated ");
+				pst = connection.prepareStatement(sqlEmpInsertQuery);
+				s1 = new Scanner(System.in);
+				System.out.println("Enter the username :: ");
+				s01 = s1.nextLine();
+				System.out.println("Enter the state :: ");
+				s2 = s1.nextLine();
+				System.out.println("Enter the street :: ");
+				s3 = s1.nextLine();
+				System.out.println("Enter the city :: ");
+				s4 = s1.nextLine();
+				System.out.println("Enter the zipcode :: ");
+				s5 = s1.nextLine();
+				System.out.println("Enter the emp type :: ");
+				s6 = s1.nextLine();
+				
+				Address a1 = new Address(s2,s3, s4, s5);
+				Employee emp2 = new Employee(s01, a1, s6);
+				System.out.println(a1);
+				System.out.println(emp2);
+				System.out.println("***********************************");
+			
+				if(pst != null)
+					{
+					pst.setString(1, emp2.getEmp_name());
+					pst.setString(2, a1.getState());
+					pst.setString(3, a1.getStreet() );
+					pst.setString(4, a1.getCity());
+					pst.setString(5, a1.getZipCode());
+					pst.setString(6, emp2.getEmp_type());
+					
+					int rowsAffected = pst.executeUpdate();
+					System.out.println("Number of rows affected is : - " +rowsAffected);
+				}
+				else
+				{
+					System.out.println("pst object is null!!!");
+				}		
+			}
+		}
+		catch(Exception e1)
+		{
+			e1.printStackTrace();
+		}
+		finally
+		{
+			//closing the resources
+			try
+			{
+				JDBC_Util.closeConnection(resultSet, pst, pst, connection);;
+					}
+			catch (Exception se)
+			{
+				se.printStackTrace();
+					}
+			}
+		
+		
+	}
 	
 	public void showData()
 	{
@@ -107,11 +200,18 @@ public class Employee
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+	public String getEmp_type() {
+		return emp_type;
+	}
+
+	public void setEmp_type(String emp_type) {
+		this.emp_type = emp_type;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee [emp_id=" + emp_id + ", emp_name=" + emp_name + ", project_name=" + project_name + ", address="
-				+ address + "]";
+				+ address + ", emp_type=" + emp_type + "]";
 	}
-	
 	
 }

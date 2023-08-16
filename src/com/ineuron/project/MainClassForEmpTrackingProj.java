@@ -6,10 +6,9 @@ public class MainClassForEmpTrackingProj {
 
 	public static void main(String[] args)
 	{
-//		Display d = new Display();
-//		d.homeScreen();
-		Employee emp = new Employee();
-		emp.showData();
+		Display d = new Display();
+		d.registerEmp();
+		
 	}
 
 }
