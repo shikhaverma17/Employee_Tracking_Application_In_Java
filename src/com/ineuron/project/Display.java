@@ -87,10 +87,23 @@ public class Display
 		else if(choiceFromManager == 2)
 		{
 			System.out.println("Selected option 2 !");
+			System.out.println("please enter the employee Id");
+			Integer eid = scan.nextInt();
+			
+			System.out.println("please enter the status of the shifttime to be accepted or rejected. \n"
+					+ " enter : 1 for accept shift of worker \n"
+					+ " enter : 2 for reject shift of worker ");
+			Integer stateUpdateFrommanager = scan.nextInt();
+			
+			Manager m12 = new Manager();
+			m12.updateEmpStatus(eid, stateUpdateFrommanager);
+			
 		}
 		else if(choiceFromManager == 3)
 		{
 			System.out.println("Selected option 3 !");
+			Display d1234 = new Display();
+			d1234.choiceOfEmp();
 		}
 		else if(choiceFromManager == 4)
 		{

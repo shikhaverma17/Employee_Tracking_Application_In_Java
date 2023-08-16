@@ -88,6 +88,75 @@ public class Manager extends Employee
 
 	}
 
+	public void updateEmpStatus(Integer eid , Integer choiceOfManager)
+	{
+		Connection connection = null;
+		PreparedStatement pst = null;
+		ResultSet resultSet = null;
+	// 	UPDATE `employeetrackingporject`.`employee` SET `shiftstatus` = 's' WHERE (`eid` = '7');
+		try
+		{
+			connection = JDBC_Util.getJDBCConnection();	
+			if(connection != null)
+			{
+
+				if(choiceOfManager == 1)
+				{
+					System.out.println("accepted " +eid +" " +choiceOfManager);
+					
+					String sqlEmpInsertAcceptQuery
+					= "UPDATE employee SET `shiftstatus` = 'accepted' WHERE (`eid` = '"+eid +"')";
+					System.out.println("sql query iniciated to accept ");
+					pst = connection.prepareStatement(sqlEmpInsertAcceptQuery);
+					
+					int rowsAffected1 = pst.executeUpdate();
+					System.out.println("Number of rows affected is : - " +rowsAffected1);
+					
+				}
+				else if(choiceOfManager == 2)
+				{
+					System.out.println("rejected "  +eid +" " +choiceOfManager);
+					
+					String sqlEmpInsertRejectedQuery
+					= "UPDATE employee SET `shiftstatus` = 'rejected' WHERE (`eid` = '"+eid +"')";
+					System.out.println("sql query iniciated to reject shift ");
+					pst = connection.prepareStatement(sqlEmpInsertRejectedQuery);
+					
+					int rowsAffected2 = pst.executeUpdate();
+					System.out.println("Number of rows affected is : - " +rowsAffected2);
+					
+				}
+				
+				else
+				{
+					System.out.println(" please enter a valid number to input!");
+					Display d1122 = new Display();
+					d1122.mangerScreen();
+				}
+				
+			}
+		}
+		
+		catch (Exception e123)
+		{
+			e123.printStackTrace();
+		}
+		finally
+		{
+			//closing the resources
+			try
+			{
+				JDBC_Util.closeConnection(resultSet, pst, pst, connection);;
+					}
+			catch (Exception se)
+			{
+				se.printStackTrace();
+					}		
+			}
+
+
+	}
+	
 	public String getDept_name() {
 		return dept_name;
 	}
