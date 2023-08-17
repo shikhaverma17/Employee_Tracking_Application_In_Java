@@ -84,7 +84,7 @@ public class Employee
 					int rowsAffected = pst.executeUpdate();
 					
 					System.out.println("Number of rows affected is : - " +rowsAffected);
-					System.out.println("Sending back o display screen - ");
+					System.out.println("Sending back to display screen - ");
 					Display d0123 = new Display();
 					d0123.choiceOfEmp();
 				}

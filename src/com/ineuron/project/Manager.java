@@ -14,6 +14,7 @@ public class Manager extends Employee
 
 
 	private String dept_name;
+	private String project_name;
 	private Integer no_of_individual_repo;
 	private String timesheet_assign_for_approval;
 
@@ -48,10 +49,10 @@ public class Manager extends Employee
 					String etype = resultSet.getString(3);
 					java.sql.Date loginDate = resultSet.getDate(4);
 					java.sql.Time shifttime = resultSet.getTime(5);
-					
+
 					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 					String strLoginDate = sdf.format(loginDate);
-					
+
 
 					System.out.println(eid + "\t" + ename + "\t" + etype
 							+ "\t" + strLoginDate + "\t" + shifttime );				
@@ -93,7 +94,7 @@ public class Manager extends Employee
 		Connection connection = null;
 		PreparedStatement pst = null;
 		ResultSet resultSet = null;
-	// 	UPDATE `employeetrackingporject`.`employee` SET `shiftstatus` = 's' WHERE (`eid` = '7');
+		// 	UPDATE `employeetrackingporject`.`employee` SET `shiftstatus` = 's' WHERE (`eid` = '7');
 		try
 		{
 			connection = JDBC_Util.getJDBCConnection();	
@@ -103,40 +104,40 @@ public class Manager extends Employee
 				if(choiceOfManager == 1)
 				{
 					System.out.println("accepted " +eid +" " +choiceOfManager);
-					
+
 					String sqlEmpInsertAcceptQuery
 					= "UPDATE employee SET `shiftstatus` = 'accepted' WHERE (`eid` = '"+eid +"')";
 					System.out.println("sql query iniciated to accept ");
 					pst = connection.prepareStatement(sqlEmpInsertAcceptQuery);
-					
+
 					int rowsAffected1 = pst.executeUpdate();
 					System.out.println("Number of rows affected is : - " +rowsAffected1);
-					
+
 				}
 				else if(choiceOfManager == 2)
 				{
 					System.out.println("rejected "  +eid +" " +choiceOfManager);
-					
+
 					String sqlEmpInsertRejectedQuery
 					= "UPDATE employee SET `shiftstatus` = 'rejected' WHERE (`eid` = '"+eid +"')";
 					System.out.println("sql query iniciated to reject shift ");
 					pst = connection.prepareStatement(sqlEmpInsertRejectedQuery);
-					
+
 					int rowsAffected2 = pst.executeUpdate();
 					System.out.println("Number of rows affected is : - " +rowsAffected2);
-					
+
 				}
-				
+
 				else
 				{
 					System.out.println(" please enter a valid number to input!");
 					Display d1122 = new Display();
 					d1122.mangerScreen();
 				}
-				
+
 			}
 		}
-		
+
 		catch (Exception e123)
 		{
 			e123.printStackTrace();
@@ -147,16 +148,61 @@ public class Manager extends Employee
 			try
 			{
 				JDBC_Util.closeConnection(resultSet, pst, pst, connection);;
-					}
+			}
 			catch (Exception se)
 			{
 				se.printStackTrace();
-					}		
-			}
+			}		
+		}
+	}
 
+	public void updateInfoFromManager(Integer eid, Manager manger)
+	{
+		Connection connection = null;
+		PreparedStatement pst = null;
+		ResultSet resultSet = null;
+		// UPDATE employee SET `deptname` = 'admin', `projectname` = 'iot', `reportingempcount` = '4' WHERE (`eid` = '7');
+
+		try
+		{
+			connection = JDBC_Util.getJDBCConnection();	
+			
+			
+			if(connection != null)
+			{
+				String sqlInsertempInfoQuery
+				= "UPDATE employee SET `deptname` = '"+manger.getDept_name()+"', `projectname` = '"+manger.getProject_name()+"', `reportingempcount` = '"+manger.getNo_of_individual_repo()+"' WHERE (`eid` = '"+eid+"');";
+
+				System.out.println("sql query iniciated to reject shift ");
+
+				pst = connection.prepareStatement(sqlInsertempInfoQuery);
+				
+				
+				
+				int rowsAffected1 = pst.executeUpdate();
+				System.out.println("Number of rows affected is : - " +rowsAffected1);
+
+			}
+		}
+		catch (Exception e1234)
+		{
+			e1234.printStackTrace();
+		}
+		finally
+		{
+			//closing the resources
+			try
+			{
+				JDBC_Util.closeConnection(resultSet, pst, pst, connection);;
+			}
+			catch (Exception se)
+			{
+				se.printStackTrace();
+			}		
+		}
 
 	}
-	
+
 	public String getDept_name() {
 		return dept_name;
 	}
@@ -176,12 +222,18 @@ public class Manager extends Employee
 		this.timesheet_assign_for_approval = timesheet_assign_for_approval;
 	}
 
+	public String getProject_name() {
+		return project_name;
+	}
 
+	public void setProject_name(String project_name) {
+		this.project_name = project_name;
+	}
 
 	@Override
 	public String toString() {
-		return "Manager [dept_name=" + dept_name + ", no_of_individual_repo=" + no_of_individual_repo
-				+ ", timesheet_assign_for_approval=" + timesheet_assign_for_approval + "]";
-	} 
+		return "Manager [dept_name=" + dept_name + ", project_name=" + project_name + ", no_of_individual_repo="
+				+ no_of_individual_repo + ", timesheet_assign_for_approval=" + timesheet_assign_for_approval + "]";
+	}
 
 }
