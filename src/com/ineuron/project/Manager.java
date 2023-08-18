@@ -43,19 +43,29 @@ public class Manager extends Employee
 				System.out.println("=====================================");
 
 				//Step4. Process the resultSet
-				while (resultSet.next()) {
+				while (resultSet.next()) 
+				{
 					Integer eid = resultSet.getInt(1);
 					String ename = resultSet.getString(2);
 					String etype = resultSet.getString(3);
-					java.sql.Date loginDate = resultSet.getDate(4);
+					java.sql.Date loginDate = resultSet.getDate(4) ;
 					java.sql.Time shifttime = resultSet.getTime(5);
-
-					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-					String strLoginDate = sdf.format(loginDate);
-
-
-					System.out.println(eid + "\t" + ename + "\t" + etype
-							+ "\t" + strLoginDate + "\t" + shifttime );				
+					
+					if( loginDate != null)
+					{
+						SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+						String strLoginDate = sdf.format(loginDate);
+						
+						 System.out.println(eid + "\t" + ename + "\t \t " + "\t" + etype
+									+ "\t" + strLoginDate+ "\t \t" + shifttime );	
+					}
+					else
+					{
+						String strLoginDate = "00-00-0000" ;
+						
+					    System.out.println(eid + "\t" + ename + "\t \t " + "\t" + etype
+									+ "\t" + strLoginDate+ "\t \t" + shifttime );	
+					}				 
 				}
 			}
 			else

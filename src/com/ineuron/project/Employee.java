@@ -35,12 +35,13 @@ public class Employee
 		PreparedStatement pst = null;
 		ResultSet resultSet = null;
 		Scanner s1 = null;
-		String s01 = null;
-		String s2 = null;
-		String s3 = null;
-		String s4 = null;
-		String s5 = null;
-		String s6 = null;
+		
+		String username1 = null;
+		String street1 = null;
+		String city1 = null;
+		String state1 = null;
+		String zipcode = null;
+		String emptype = null;
 		
 		try 
 		{
@@ -53,21 +54,27 @@ public class Employee
 				System.out.println("sql query iniciated ");
 				pst = connection.prepareStatement(sqlEmpInsertQuery);
 				s1 = new Scanner(System.in);
-				System.out.println("Enter the username :: ");
-				s01 = s1.nextLine();
-				System.out.println("Enter the state :: ");
-				s2 = s1.nextLine();
-				System.out.println("Enter the street :: ");
-				s3 = s1.nextLine();
-				System.out.println("Enter the city :: ");
-				s4 = s1.nextLine();
-				System.out.println("Enter the zipcode :: ");
-				s5 = s1.nextLine();
-				System.out.println("Enter the emp type :: ");
-				s6 = s1.nextLine();
 				
-				Address a1 = new Address(s2,s3, s4, s5);
-				Employee emp2 = new Employee(s01, a1, s6);
+				System.out.println("Enter the username :: ");
+				username1 = s1.nextLine();
+				
+				System.out.println("Enter the state :: ");
+				state1 = s1.nextLine();
+				
+				System.out.println("Enter the street :: ");
+				street1 = s1.nextLine();
+				
+				System.out.println("Enter the city :: ");
+				city1 = s1.nextLine();
+				
+				System.out.println("Enter the zipcode :: ");
+				zipcode = s1.nextLine();
+				
+				System.out.println("Enter the emp type :: ");
+				emptype = s1.nextLine();
+				
+				Address a1 = new Address(street1,city1, state1, zipcode);
+				Employee emp2 = new Employee(username1, a1, emptype);
 				System.out.println(a1);
 				System.out.println(emp2);
 				System.out.println("***********************************");
