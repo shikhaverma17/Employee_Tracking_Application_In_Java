@@ -116,7 +116,8 @@ public class Display
 			Integer eid = scan.nextInt();
 			
 			System.out.println("please enter the number of emps reporting in a project");
-			Integer noOfReprtingEmp = br.read();
+			Integer noOfReprtingEmp = scan.nextInt(); 
+			// br.read();
 			
 			System.out.println("please enter the project name to emps");
 			String projectname = scan12345.nextLine();
@@ -128,7 +129,7 @@ public class Display
 			m1.setDept_name(deptname);
 			m1.setProject_name(projectname);
 			m1.setNo_of_individual_repo(noOfReprtingEmp);
-			
+			System.out.println(m1);
 			Manager m2 = new Manager();
 			m2.updateInfoFromManager(eid, m1);
 						

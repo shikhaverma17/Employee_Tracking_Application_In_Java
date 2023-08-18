@@ -176,8 +176,9 @@ public class Manager extends Employee
 		try
 		{
 			connection = JDBC_Util.getJDBCConnection();	
+			System.out.println(eid);
 			
-			
+			System.out.println(manger);
 			if(connection != null)
 			{
 				String sqlInsertempInfoQuery
