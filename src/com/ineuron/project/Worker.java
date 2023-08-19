@@ -52,6 +52,10 @@ public class Worker extends Employee
 				
 				int rowsAffected1 = pst.executeUpdate();
 				System.out.println("Number of rows affected is : - " +rowsAffected1);
+				
+				System.out.println("=====================================");
+				Display d23765 = new  Display();
+				d23765.workerScreen();
 
 			}
 		}
@@ -110,6 +114,10 @@ public class Worker extends Employee
 					System.out.println( "\t" + ename + "\t" + strworkerloginDate
 							+ "\t" + shifttime + "\t" + shiftstatus );				
 				}
+				
+				System.out.println("=====================================");
+				Display d23 = new  Display();
+				d23.workerScreen();
 			}
 			else
 			{

@@ -31,6 +31,7 @@ CREATE TABLE `employee` (
   `shiftstatus` varchar(45) DEFAULT NULL,
   `deptname` varchar(45) DEFAULT NULL,
   `projectname` varchar(45) DEFAULT NULL,
+  `reportingempcount` int DEFAULT NULL,
   PRIMARY KEY (`eid`)
 );
 

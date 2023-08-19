@@ -10,23 +10,74 @@ import in.ineuron.util.JDBC_Util;
 
 public class Employee
 {
-	
+
 	private Integer emp_id;
 	private String emp_name;
 	private String project_name;
 	private Address address;
 	private String emp_type;
-	
+
 	Employee()
 	{
-		
+
 	}
-	
+
 	Employee(String ename, Address add, String etype)
 	{
 		this.emp_name = ename;
 		this.address = add;
 		this.emp_type = etype;
+	}
+
+	public Integer CheckEmpId(Integer eid)
+	{
+		String sqlEmpSelectQuery
+		= "select eid,ename from employee WHERE (`eid` = '"+eid +"')";
+		Integer employeeIdValidation = null;
+		Connection connection = null;
+		PreparedStatement pst = null;
+		ResultSet resultSet = null;		
+		try
+		{
+			connection = JDBC_Util.getJDBCConnection();	
+			if(connection != null)
+			{
+				pst = connection.prepareStatement(sqlEmpSelectQuery);
+				System.out.println("sql query iniciated to to check if emp id is valid! ");
+				if(pst != null)
+				{
+					resultSet= pst.executeQuery();
+					System.out.println("object value in result set "+resultSet);
+					if(resultSet.next())
+					{
+						System.out.println("Employee Id is : " +resultSet.getInt(1));
+						System.out.println("Employee name is : " +resultSet.getString(2));
+
+						return	employeeIdValidation = +resultSet.getInt(1);
+					}
+					else
+					{
+						System.out.println("no record available with the given id: " +eid);
+						System.out.println("Sending back to manager screen! ");					
+						Display d101266 = new Display();
+						d101266.choiceOfEmp();;					
+					}
+
+				}
+				else
+				{
+					System.out.println(" pst object null!!!");
+				}
+
+			}
+		}
+		catch(Exception e19909)
+		{
+			e19909.printStackTrace();
+		}
+		return employeeIdValidation;
+
+
 	}
 
 	public void registerEmployee()
@@ -35,14 +86,14 @@ public class Employee
 		PreparedStatement pst = null;
 		ResultSet resultSet = null;
 		Scanner s1 = null;
-		
+
 		String username1 = null;
 		String street1 = null;
 		String city1 = null;
 		String state1 = null;
 		String zipcode = null;
 		String emptype = null;
-		
+
 		try 
 		{
 			connection = JDBC_Util.getJDBCConnection();			
@@ -54,42 +105,42 @@ public class Employee
 				System.out.println("sql query iniciated ");
 				pst = connection.prepareStatement(sqlEmpInsertQuery);
 				s1 = new Scanner(System.in);
-				
+
 				System.out.println("Enter the username :: ");
 				username1 = s1.nextLine();
-				
+
 				System.out.println("Enter the state :: ");
 				state1 = s1.nextLine();
-				
+
 				System.out.println("Enter the street :: ");
 				street1 = s1.nextLine();
-				
+
 				System.out.println("Enter the city :: ");
 				city1 = s1.nextLine();
-				
+
 				System.out.println("Enter the zipcode :: ");
 				zipcode = s1.nextLine();
-				
+
 				System.out.println("Enter the emp type :: ");
 				emptype = s1.nextLine();
-				
+
 				Address a1 = new Address(street1,city1, state1, zipcode);
 				Employee emp2 = new Employee(username1, a1, emptype);
 				System.out.println(a1);
 				System.out.println(emp2);
 				System.out.println("***********************************");
-			
+
 				if(pst != null)
-					{
+				{
 					pst.setString(1, emp2.getEmp_name());
 					pst.setString(2, a1.getState());
 					pst.setString(3, a1.getStreet() );
 					pst.setString(4, a1.getCity());
 					pst.setString(5, a1.getZipCode());
 					pst.setString(6, emp2.getEmp_type());
-					
+
 					int rowsAffected = pst.executeUpdate();
-					
+
 					System.out.println("Number of rows affected is : - " +rowsAffected);
 					System.out.println("Sending back to display screen - ");
 					Display d0123 = new Display();
@@ -111,16 +162,16 @@ public class Employee
 			try
 			{
 				JDBC_Util.closeConnection(resultSet, pst, pst, connection);;
-					}
+			}
 			catch (Exception se)
 			{
 				se.printStackTrace();
-					}
 			}
-		
-		
+		}
+
+
 	}
-	
+
 	public void showData()
 	{
 		Connection connection = null;
@@ -129,64 +180,64 @@ public class Employee
 		try {
 
 			connection = JDBC_Util.getJDBCConnection();
-			
+
 			if(connection != null)
 			{
-			//Step3. Create statement Object and send the query
-			String sqlSelectQuery = "select * from employee";
-			statement = connection.createStatement();
-			
-			resultSet = statement.executeQuery(sqlSelectQuery);
-			
-			System.out.println();
-			System.out.println("=====================================");
-			
-			//Step4. Process the resultSet
-			while (resultSet.next()) {
-				Integer eid = resultSet.getInt(1);
-				String ename = resultSet.getString(2);
-				String state = resultSet.getString(3);
-				String street = resultSet.getString(4);
-				String city = resultSet.getString(5);
-				String zipcode = resultSet.getString(6);
-				String etype = resultSet.getString(7);
-				Integer depttype = resultSet.getInt(8);
-				
-				System.out.println(eid + "\t" + ename + "\t" + state
-						+ "\t" + street + "\t" + city + "\t" + zipcode 
-						+ "\t" + etype + "\t" + depttype );				
+				//Step3. Create statement Object and send the query
+				String sqlSelectQuery = "select * from employee";
+				statement = connection.createStatement();
+
+				resultSet = statement.executeQuery(sqlSelectQuery);
+
+				System.out.println();
+				System.out.println("=====================================");
+
+				//Step4. Process the resultSet
+				while (resultSet.next()) {
+					Integer eid = resultSet.getInt(1);
+					String ename = resultSet.getString(2);
+					String state = resultSet.getString(3);
+					String street = resultSet.getString(4);
+					String city = resultSet.getString(5);
+					String zipcode = resultSet.getString(6);
+					String etype = resultSet.getString(7);
+					Integer depttype = resultSet.getInt(8);
+
+					System.out.println(eid + "\t" + ename + "\t" + state
+							+ "\t" + street + "\t" + city + "\t" + zipcode 
+							+ "\t" + etype + "\t" + depttype );				
 				}
 			}
 			else
 			{
 				System.out.println("connection object is null");
 			}
-			
+
 		}
-		
+
 		catch(SQLException se)
+		{
+			se.printStackTrace();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		finally
+		{
+			//closing the resources
+			try
+			{
+				JDBC_Util.closeConnection(resultSet, null, statement, connection);
+			}
+			catch (Exception se)
 			{
 				se.printStackTrace();
-						}
-		catch(Exception e)
-					{
-						e.printStackTrace();
-						}
-					
-		finally
-			{
-				//closing the resources
-				try
-				{
-					JDBC_Util.closeConnection(resultSet, null, statement, connection);
-						}
-				catch (Exception se)
-				{
-					se.printStackTrace();
-						}
-				}			
+			}
+		}			
 	}
-	
+
 	public Integer getEmp_id() {
 		return emp_id;
 	}
@@ -224,5 +275,5 @@ public class Employee
 		return "Employee [emp_id=" + emp_id + ", emp_name=" + emp_name + ", project_name=" + project_name + ", address="
 				+ address + ", emp_type=" + emp_type + "]";
 	}
-	
+
 }

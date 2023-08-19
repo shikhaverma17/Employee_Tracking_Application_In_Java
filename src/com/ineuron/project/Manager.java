@@ -67,6 +67,9 @@ public class Manager extends Employee
 									+ "\t" + strLoginDate+ "\t \t" + shifttime );	
 					}				 
 				}
+				System.out.println("=====================================");
+				Display d223344 = new  Display();
+				d223344.mangerScreen();
 			}
 			else
 			{
@@ -121,7 +124,21 @@ public class Manager extends Employee
 					pst = connection.prepareStatement(sqlEmpInsertAcceptQuery);
 
 					int rowsAffected1 = pst.executeUpdate();
-					System.out.println("Number of rows affected is : - " +rowsAffected1);
+					
+					if(rowsAffected1 > 0)
+					{
+						System.out.println("Number of rows affected is : " +rowsAffected1);
+						System.out.println("=====================================");
+						Display d22334671 = new  Display();
+						d22334671.mangerScreen();
+					}
+					else
+					{
+						System.out.println("no record available with the given id: " +eid);
+						System.out.println("Sending back to manager screen! ");
+						Display d10120 = new Display();
+						d10120.mangerScreen();
+					}
 
 				}
 				else if(choiceOfManager == 2)
@@ -134,8 +151,20 @@ public class Manager extends Employee
 					pst = connection.prepareStatement(sqlEmpInsertRejectedQuery);
 
 					int rowsAffected2 = pst.executeUpdate();
-					System.out.println("Number of rows affected is : - " +rowsAffected2);
-
+					
+					if(rowsAffected2 > 0)
+					{
+						System.out.println("Number of rows affected is : " +rowsAffected2);
+						Display d2233467123 = new  Display();
+						d2233467123.mangerScreen();
+					}
+					else
+					{
+						System.out.println("no record available with the given id: " +eid);
+						System.out.println("Sending back to manager screen! ");
+						Display d101266 = new Display();
+						d101266.mangerScreen();
+					}
 				}
 
 				else
@@ -184,15 +213,15 @@ public class Manager extends Employee
 				String sqlInsertempInfoQuery
 				= "UPDATE employee SET `deptname` = '"+manger.getDept_name()+"', `projectname` = '"+manger.getProject_name()+"', `reportingempcount` = '"+manger.getNo_of_individual_repo()+"' WHERE (`eid` = '"+eid+"');";
 
-				System.out.println("sql query iniciated to reject shift ");
+				System.out.println("sql query initiated to update emp info like dept name project name etc..! ");
 
 				pst = connection.prepareStatement(sqlInsertempInfoQuery);
-				
-				
-				
+		
 				int rowsAffected1 = pst.executeUpdate();
 				System.out.println("Number of rows affected is : - " +rowsAffected1);
-
+				System.out.println("=====================================");
+				Display d000212 = new  Display();
+				d000212.mangerScreen();
 			}
 		}
 		catch (Exception e1234)
