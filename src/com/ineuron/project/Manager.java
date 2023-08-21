@@ -40,9 +40,9 @@ public class Manager extends Employee
 
 				resultSet = pst.executeQuery();
 
-				System.out.println();
 				System.out.println("============================================================================================");
-
+				System.out.println("Eid" + "\t\t" + "Name" + "\t\t " + "EType"
+						+ "\t\t" + "Login date"+ "\t\t" +"Shift-time" );
 				//Step4. Process the resultSet
 				while (resultSet.next()) 
 				{
@@ -51,32 +51,26 @@ public class Manager extends Employee
 					String etype = resultSet.getString(3);
 					java.sql.Date loginDate = resultSet.getDate(4) ;
 					java.sql.Time shifttime = resultSet.getTime(5);
-					
+
 					if( loginDate != null)
 					{
 						SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 						String strLoginDate = sdf.format(loginDate);
-						
 
-						 System.out.println("Eid" + "\t\t" + "Name" + "\t\t " + "EType"
-									+ "\t\t" + "Login date"+ "\t\t" +"Shift-time" );
-						 System.out.println("--------------------------------------------------------------------------------------------");
-						 System.out.println("");
-						 
-						 System.out.println(eid + "\t\t" + ename + "\t\t"+ etype
-									+ "\t\t" + strLoginDate+ "\t\t" + shifttime );	
+						System.out.println("---------------------------------------------------------------------------------------");
+						System.out.println(eid + "\t\t" + ename + "\t\t"+ etype
+								+ "\t\t" + strLoginDate+ "\t\t" + shifttime );	
 					}
 					else
 					{
 						String strLoginDate = "00-00-0000" ;
-						
-					    System.out.println(eid + "\t\t" + ename + "\t\t " +  etype
-									+ "\t\t" + strLoginDate+ "\t\t" + shifttime );	
+						System.out.println("---------------------------------------------------------------------------------------");
+						System.out.println(eid + "\t\t" + ename + "\t\t"+ etype
+								+ "\t\t" + strLoginDate+ "\t\t" + shifttime );	
 					}				 
 				}
 				System.out.println("============================================================================================");
-				Display d223344 = new  Display();
-				d223344.mangerScreen();
+
 			}
 			else
 			{
@@ -99,7 +93,12 @@ public class Manager extends Employee
 			//closing the resources
 			try
 			{
+//				System.out.println("started");
 				JDBC_Util.closeConnection(resultSet, null, statement, connection);
+//				System.out.println("ended");
+				System.out.println("***********************************************************");
+				Display d223344 = new  Display();
+				d223344.mangerScreen();
 			}
 			catch (Exception se)
 			{
@@ -120,26 +119,25 @@ public class Manager extends Employee
 			connection = JDBC_Util.getJDBCConnection();	
 			if(connection != null)
 			{
-
 				if(choiceOfManager == 1)
 				{
 					System.out.println("accepted::" +eid +" " +choiceOfManager);
 
 					String sqlEmpInsertAcceptQuery
 					= "UPDATE employee SET `shiftstatus` = 'accepted' WHERE (`eid` = '"+eid +"')";
-					
+
 					//System.out.println("sql query initiated to accept ");
-					
+
 					pst = connection.prepareStatement(sqlEmpInsertAcceptQuery);
 
 					int rowsAffected1 = pst.executeUpdate();
-					
+
 					if(rowsAffected1 > 0)
 					{
-						//System.out.println("Number of rows affected is : " +rowsAffected1);
-						
-						Display d22334671 = new  Display();
-						d22334671.mangerScreen();
+						System.out.println("Number of rows affected is : " +rowsAffected1);
+
+						//						Display d22334671 = new  Display();
+						//						d22334671.mangerScreen();
 					}
 					else
 					{
@@ -147,9 +145,6 @@ public class Manager extends Employee
 						System.out.println("----------------------------------");
 						System.out.println("Sending back to manager screen! ");
 						System.out.println("----------------------------------");
-						
-						Display d10120 = new Display();
-						d10120.mangerScreen();
 					}
 
 				}
@@ -163,12 +158,12 @@ public class Manager extends Employee
 					pst = connection.prepareStatement(sqlEmpInsertRejectedQuery);
 
 					int rowsAffected2 = pst.executeUpdate();
-					
+
 					if(rowsAffected2 > 0)
 					{
-						//System.out.println("Number of rows affected is : " +rowsAffected2);
-						Display d2233467123 = new  Display();
-						d2233467123.mangerScreen();
+						System.out.println("Number of rows affected is : " +rowsAffected2);
+						//						Display d2233467123 = new  Display();
+						//						d2233467123.mangerScreen();
 					}
 					else
 					{
@@ -176,18 +171,19 @@ public class Manager extends Employee
 						System.out.println("----------------------------------");
 						System.out.println("Sending back to manager screen! ");
 						System.out.println("----------------------------------");
-						Display d101266 = new Display();
-						d101266.mangerScreen();
+						//						Display d101266 = new Display();
+						//						d101266.mangerScreen();
 					}
 				}
 
 				else
 				{
 					System.out.println(" please enter a valid number to input!");
-					Display d1122 = new Display();
-					d1122.mangerScreen();
+					System.out.println("Sending back to manager screen! ");
+					System.out.println("----------------------------------");
+					//					Display d1122 = new Display();
+					//					d1122.mangerScreen();
 				}
-
 			}
 		}
 
@@ -200,7 +196,10 @@ public class Manager extends Employee
 			//closing the resources
 			try
 			{
-				JDBC_Util.closeConnection(resultSet, pst, pst, connection);;
+				JDBC_Util.closeConnection(resultSet, pst, pst, connection);
+				System.out.println("********************************************");
+				Display d10120 = new Display();
+				d10120.mangerScreen();
 			}
 			catch (Exception se)
 			{
@@ -220,9 +219,9 @@ public class Manager extends Employee
 		{
 			connection = JDBC_Util.getJDBCConnection();	
 			//System.out.println(eid);
-			
+
 			//System.out.println(manger);
-			
+
 			if(connection != null)
 			{
 				String sqlInsertempInfoQuery
@@ -231,14 +230,12 @@ public class Manager extends Employee
 				//System.out.println("sql query initiated to update emp info like dept name project name etc..! ");
 
 				pst = connection.prepareStatement(sqlInsertempInfoQuery);
-		
+
 				int rowsAffected1 = pst.executeUpdate();
-				
-				//System.out.println("Number of rows affected is : - " +rowsAffected1);
-				//System.out.println("=====================================");
-				
-				Display d000212 = new  Display();
-				d000212.mangerScreen();
+
+				System.out.println("Number of rows affected is : - " +rowsAffected1);
+				System.out.println("=====================================");
+
 			}
 		}
 		catch (Exception e1234)
@@ -250,7 +247,10 @@ public class Manager extends Employee
 			//closing the resources
 			try
 			{
-				JDBC_Util.closeConnection(resultSet, pst, pst, connection);;
+				JDBC_Util.closeConnection(resultSet, pst, pst, connection);
+				System.out.println("*********************************************");
+				Display d000212 = new  Display();
+				d000212.mangerScreen();
 			}
 			catch (Exception se)
 			{

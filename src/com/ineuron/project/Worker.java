@@ -99,7 +99,8 @@ public class Worker extends Employee
 				resultSet = pst.executeQuery();
 
 				System.out.println("==========================================================");
-
+				System.out.println( "NAME" + "\t\t" + "LOGIN DATE"
+						+ "\t" + "SHIFT-TIME" + "\t" + "STATUS" );
 				//Step4. Process the resultSet
 				while (resultSet.next()) {
 					
@@ -108,16 +109,24 @@ public class Worker extends Employee
 					java.sql.Time shifttime = resultSet.getTime(3) ;
 					String shiftstatus = resultSet.getString(4) ;
 					
-					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-					String strworkerloginDate = sdf.format(logindate);	
 
-					System.out.println( "NAME" + "\t\t" + "LOGIN DATE"
-							+ "\t" + "SHIFT-TIME" + "\t" + "STATUS" );
-					
-					System.out.println("");
-					
-					System.out.println( ename + "\t\t" + strworkerloginDate
-							+ "\t" + shifttime + "\t" + shiftstatus );				
+					if( logindate != null)
+					{
+						SimpleDateFormat sdfWorker = new SimpleDateFormat("dd-MM-yyyy");
+						String strworkerloginDate = sdfWorker.format(logindate);
+
+						System.out.println("---------------------------------------------------------------------------------------");
+						System.out.println( ename + "\t\t" + strworkerloginDate
+								+ "\t" + shifttime + "\t" + shiftstatus );	
+					}
+					else
+					{
+						String strLoginDateWorker = "00-00-0000" ;
+						System.out.println("---------------------------------------------------------------------------------------");
+						System.out.println( ename + "\t\t" + strLoginDateWorker
+								+ "\t" + shifttime + "\t" + shiftstatus );	
+					}
+				
 				}
 				
 				System.out.println("==========================================================");

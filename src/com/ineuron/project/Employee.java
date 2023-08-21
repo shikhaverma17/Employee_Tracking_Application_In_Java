@@ -159,8 +159,9 @@ public class Employee
 					System.out.println("------------------------------------");
 					System.out.println("Registered Successfully.....");
 					System.out.println("------------------------------------");
-					Display d0123 = new Display();
-					d0123.choiceOfEmp();
+					System.out.println("Reverting back to home screen.....");
+					System.out.println("------------------------------------");
+					
 				}
 				else
 				{
@@ -177,82 +178,82 @@ public class Employee
 			//closing the resources
 			try
 			{
-				JDBC_Util.closeConnection(resultSet, pst, pst, connection);;
+				JDBC_Util.closeConnection(resultSet, pst, pst, connection);
+				System.out.println("***************************************");
+				Display d0123 = new Display();
+				d0123.choiceOfEmp();
 			}
 			catch (Exception se)
 			{
 				se.printStackTrace();
 			}
 		}
-
-
 	}
 
-	public void showData()
-	{
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
-		try {
-
-			connection = JDBC_Util.getJDBCConnection();
-
-			if(connection != null)
-			{
-				//Step3. Create statement Object and send the query
-				String sqlSelectQuery = "select * from employee";
-				statement = connection.createStatement();
-
-				resultSet = statement.executeQuery(sqlSelectQuery);
-
-				System.out.println();
-				System.out.println("=====================================");
-
-				//Step4. Process the resultSet
-				while (resultSet.next()) {
-					Integer eid = resultSet.getInt(1);
-					String ename = resultSet.getString(2);
-					String state = resultSet.getString(3);
-					String street = resultSet.getString(4);
-					String city = resultSet.getString(5);
-					String zipcode = resultSet.getString(6);
-					String etype = resultSet.getString(7);
-					Integer depttype = resultSet.getInt(8);
-
-					System.out.println(eid + "\t" + ename + "\t" + state
-							+ "\t" + street + "\t" + city + "\t" + zipcode 
-							+ "\t" + etype + "\t" + depttype );				
-				}
-			}
-			else
-			{
-				System.out.println("connection object is null");
-			}
-
-		}
-
-		catch(SQLException se)
-		{
-			se.printStackTrace();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		finally
-		{
-			//closing the resources
-			try
-			{
-				JDBC_Util.closeConnection(resultSet, null, statement, connection);
-			}
-			catch (Exception se)
-			{
-				se.printStackTrace();
-			}
-		}			
-	}
+//	public void showData()
+//	{
+//		Connection connection = null;
+//		Statement statement = null;
+//		ResultSet resultSet = null;
+//		try {
+//
+//			connection = JDBC_Util.getJDBCConnection();
+//
+//			if(connection != null)
+//			{
+//				//Step3. Create statement Object and send the query
+//				String sqlSelectQuery = "select * from employee";
+//				statement = connection.createStatement();
+//
+//				resultSet = statement.executeQuery(sqlSelectQuery);
+//
+//				System.out.println("=====================================");
+//
+//				//Step4. Process the resultSet
+//				while (resultSet.next()) {
+//					Integer eid = resultSet.getInt(1);
+//					String ename = resultSet.getString(2);
+//					String state = resultSet.getString(3);
+//					String street = resultSet.getString(4);
+//					String city = resultSet.getString(5);
+//					String zipcode = resultSet.getString(6);
+//					String etype = resultSet.getString(7);
+//					Integer depttype = resultSet.getInt(8);
+//
+//					System.out.println(eid + "\t" + ename + "\t" + state
+//							+ "\t" + street + "\t" + city + "\t" + zipcode 
+//							+ "\t" + etype + "\t" + depttype );				
+//				}
+//			}
+//			else
+//			{
+//				System.out.println("connection object is null");
+//			}
+//
+//		}
+//
+//		catch(SQLException se)
+//		{
+//			se.printStackTrace();
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//
+//		finally
+//		{
+//			//closing the resources
+//			try
+//			{
+//				JDBC_Util.closeConnection(resultSet, null, statement, connection);
+//			}
+//			catch (Exception se)
+//			{
+//				se.printStackTrace();
+//			}
+//		}			
+//	}
 
 	public Integer getEmp_id() {
 		return emp_id;
