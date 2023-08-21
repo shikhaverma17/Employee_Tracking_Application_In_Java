@@ -33,32 +33,39 @@ public class Employee
 	{
 		String sqlEmpSelectQuery
 		= "select eid,ename from employee WHERE (`eid` = '"+eid +"')";
+		
 		Integer employeeIdValidation = null;
 		Connection connection = null;
 		PreparedStatement pst = null;
-		ResultSet resultSet = null;		
+		ResultSet resultSet = null;	
+		
 		try
 		{
 			connection = JDBC_Util.getJDBCConnection();	
 			if(connection != null)
 			{
 				pst = connection.prepareStatement(sqlEmpSelectQuery);
-				System.out.println("sql query iniciated to to check if emp id is valid! ");
+				//System.out.println("sql query initiated to to check if emp id is valid! ");
 				if(pst != null)
 				{
 					resultSet= pst.executeQuery();
-					System.out.println("object value in result set "+resultSet);
+					//System.out.println("object value in result set "+resultSet);
 					if(resultSet.next())
 					{
+						System.out.println("----------------------------------------------");
 						System.out.println("Employee Id is : " +resultSet.getInt(1));
 						System.out.println("Employee name is : " +resultSet.getString(2));
+						System.out.println("----------------------------------------------");
+						
 
 						return	employeeIdValidation = +resultSet.getInt(1);
 					}
 					else
 					{
-						System.out.println("no record available with the given id: " +eid);
-						System.out.println("Sending back to manager screen! ");					
+						System.out.println("No Employee is registered with the given id::" +eid);
+						System.out.println("-----------------------------------");
+						System.out.println("Sending back to manager screen! ");	
+						System.out.println("-----------------------------------");
 						Display d101266 = new Display();
 						d101266.choiceOfEmp();;					
 					}
@@ -102,7 +109,7 @@ public class Employee
 				//Step3. Create Preparedstatement Object and send the query
 				String sqlEmpInsertQuery
 				= "insert into employee (`ename`,`state`,`street`,`city`,`zipcode`,`etype`) values(?,?,?,?,?,?) ";
-				System.out.println("sql query iniciated ");
+				//System.out.println("sql query initiated ");
 				pst = connection.prepareStatement(sqlEmpInsertQuery);
 				s1 = new Scanner(System.in);
 
@@ -112,11 +119,14 @@ public class Employee
 				System.out.println("Enter the state :: ");
 				state1 = s1.nextLine();
 
+				System.out.println("Enter the city :: ");
+				city1 = s1.nextLine();
+
 				System.out.println("Enter the street :: ");
 				street1 = s1.nextLine();
 
-				System.out.println("Enter the city :: ");
-				city1 = s1.nextLine();
+//				System.out.println("Enter the city :: ");
+//				city1 = s1.nextLine();
 
 				System.out.println("Enter the zipcode :: ");
 				zipcode = s1.nextLine();
@@ -126,9 +136,12 @@ public class Employee
 
 				Address a1 = new Address(street1,city1, state1, zipcode);
 				Employee emp2 = new Employee(username1, a1, emptype);
-				System.out.println(a1);
-				System.out.println(emp2);
-				System.out.println("***********************************");
+				
+				
+//				System.out.println(a1);
+//				System.out.println(emp2);
+				
+				//System.out.println("***********************************");
 
 				if(pst != null)
 				{
@@ -141,8 +154,11 @@ public class Employee
 
 					int rowsAffected = pst.executeUpdate();
 
-					System.out.println("Number of rows affected is : - " +rowsAffected);
-					System.out.println("Sending back to display screen - ");
+					//System.out.println("Number of rows affected is : - " +rowsAffected);
+					
+					System.out.println("------------------------------------");
+					System.out.println("Registered Successfully.....");
+					System.out.println("------------------------------------");
 					Display d0123 = new Display();
 					d0123.choiceOfEmp();
 				}

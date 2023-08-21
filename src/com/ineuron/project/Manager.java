@@ -21,6 +21,7 @@ public class Manager extends Employee
 
 	public void showAllEmp()
 	{
+		System.out.println("");
 		System.out.println("showing all employees from data base below: - ");
 
 		Connection connection = null;
@@ -40,7 +41,7 @@ public class Manager extends Employee
 				resultSet = pst.executeQuery();
 
 				System.out.println();
-				System.out.println("=====================================");
+				System.out.println("============================================================================================");
 
 				//Step4. Process the resultSet
 				while (resultSet.next()) 
@@ -56,18 +57,24 @@ public class Manager extends Employee
 						SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 						String strLoginDate = sdf.format(loginDate);
 						
-						 System.out.println(eid + "\t" + ename + "\t \t " + "\t" + etype
-									+ "\t" + strLoginDate+ "\t \t" + shifttime );	
+
+						 System.out.println("Eid" + "\t\t" + "Name" + "\t\t " + "EType"
+									+ "\t\t" + "Login date"+ "\t\t" +"Shift-time" );
+						 System.out.println("--------------------------------------------------------------------------------------------");
+						 System.out.println("");
+						 
+						 System.out.println(eid + "\t\t" + ename + "\t\t"+ etype
+									+ "\t\t" + strLoginDate+ "\t\t" + shifttime );	
 					}
 					else
 					{
 						String strLoginDate = "00-00-0000" ;
 						
-					    System.out.println(eid + "\t" + ename + "\t \t " + "\t" + etype
-									+ "\t" + strLoginDate+ "\t \t" + shifttime );	
+					    System.out.println(eid + "\t\t" + ename + "\t\t " +  etype
+									+ "\t\t" + strLoginDate+ "\t\t" + shifttime );	
 					}				 
 				}
-				System.out.println("=====================================");
+				System.out.println("============================================================================================");
 				Display d223344 = new  Display();
 				d223344.mangerScreen();
 			}
@@ -116,26 +123,31 @@ public class Manager extends Employee
 
 				if(choiceOfManager == 1)
 				{
-					System.out.println("accepted " +eid +" " +choiceOfManager);
+					System.out.println("accepted::" +eid +" " +choiceOfManager);
 
 					String sqlEmpInsertAcceptQuery
 					= "UPDATE employee SET `shiftstatus` = 'accepted' WHERE (`eid` = '"+eid +"')";
-					System.out.println("sql query iniciated to accept ");
+					
+					//System.out.println("sql query initiated to accept ");
+					
 					pst = connection.prepareStatement(sqlEmpInsertAcceptQuery);
 
 					int rowsAffected1 = pst.executeUpdate();
 					
 					if(rowsAffected1 > 0)
 					{
-						System.out.println("Number of rows affected is : " +rowsAffected1);
-						System.out.println("=====================================");
+						//System.out.println("Number of rows affected is : " +rowsAffected1);
+						
 						Display d22334671 = new  Display();
 						d22334671.mangerScreen();
 					}
 					else
 					{
-						System.out.println("no record available with the given id: " +eid);
+						System.out.println("No Employee is registered with the given id: " +eid);
+						System.out.println("----------------------------------");
 						System.out.println("Sending back to manager screen! ");
+						System.out.println("----------------------------------");
+						
 						Display d10120 = new Display();
 						d10120.mangerScreen();
 					}
@@ -154,14 +166,16 @@ public class Manager extends Employee
 					
 					if(rowsAffected2 > 0)
 					{
-						System.out.println("Number of rows affected is : " +rowsAffected2);
+						//System.out.println("Number of rows affected is : " +rowsAffected2);
 						Display d2233467123 = new  Display();
 						d2233467123.mangerScreen();
 					}
 					else
 					{
-						System.out.println("no record available with the given id: " +eid);
+						System.out.println("No Employee is registered with the given id: " +eid);
+						System.out.println("----------------------------------");
 						System.out.println("Sending back to manager screen! ");
+						System.out.println("----------------------------------");
 						Display d101266 = new Display();
 						d101266.mangerScreen();
 					}
@@ -205,21 +219,24 @@ public class Manager extends Employee
 		try
 		{
 			connection = JDBC_Util.getJDBCConnection();	
-			System.out.println(eid);
+			//System.out.println(eid);
 			
-			System.out.println(manger);
+			//System.out.println(manger);
+			
 			if(connection != null)
 			{
 				String sqlInsertempInfoQuery
 				= "UPDATE employee SET `deptname` = '"+manger.getDept_name()+"', `projectname` = '"+manger.getProject_name()+"', `reportingempcount` = '"+manger.getNo_of_individual_repo()+"' WHERE (`eid` = '"+eid+"');";
 
-				System.out.println("sql query initiated to update emp info like dept name project name etc..! ");
+				//System.out.println("sql query initiated to update emp info like dept name project name etc..! ");
 
 				pst = connection.prepareStatement(sqlInsertempInfoQuery);
 		
 				int rowsAffected1 = pst.executeUpdate();
-				System.out.println("Number of rows affected is : - " +rowsAffected1);
-				System.out.println("=====================================");
+				
+				//System.out.println("Number of rows affected is : - " +rowsAffected1);
+				//System.out.println("=====================================");
+				
 				Display d000212 = new  Display();
 				d000212.mangerScreen();
 			}

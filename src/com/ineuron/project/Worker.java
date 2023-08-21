@@ -20,7 +20,7 @@ public class Worker extends Employee
 
 	public void insertWorkerDetails(Integer eid, Worker worker)
 	{
-		System.out.println("insert worker method loading..worker ");
+		//System.out.println("insert worker method loading..worker ");
 
 		Connection connection = null;
 		PreparedStatement pst = null;
@@ -42,7 +42,7 @@ public class Worker extends Employee
 				String sqlInsertempInfoQuery
 				="UPDATE employee SET `logindate` = ?, `shifttime` = ? WHERE (`eid` = ?)";
 				
-				System.out.println("sql query initiated to update shift ");
+				//System.out.println("sql query initiated to update shift ");
 				
 				pst = connection.prepareStatement(sqlInsertempInfoQuery);
 				
@@ -51,9 +51,9 @@ public class Worker extends Employee
 				pst.setInt(3, eid);
 				
 				int rowsAffected1 = pst.executeUpdate();
-				System.out.println("Number of rows affected is : - " +rowsAffected1);
+				//System.out.println("Number of rows affected is : - " +rowsAffected1);
 				
-				System.out.println("=====================================");
+				//System.out.println("=====================================");
 				Display d23765 = new  Display();
 				d23765.workerScreen();
 
@@ -79,7 +79,7 @@ public class Worker extends Employee
 	}
 	public void showWokerShiftStatus(Integer workerId)
 	{
-		System.out.println("Show shift time sheet method loading...");
+		//System.out.println("Show shift time sheet method loading...");
 
 		Connection connection = null;
 		Statement statement = null;
@@ -98,7 +98,7 @@ public class Worker extends Employee
 
 				resultSet = pst.executeQuery();
 
-				System.out.println("=====================================");
+				System.out.println("==========================================================");
 
 				//Step4. Process the resultSet
 				while (resultSet.next()) {
@@ -111,11 +111,16 @@ public class Worker extends Employee
 					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 					String strworkerloginDate = sdf.format(logindate);	
 
-					System.out.println( "\t" + ename + "\t" + strworkerloginDate
+					System.out.println( "NAME" + "\t\t" + "LOGIN DATE"
+							+ "\t" + "SHIFT-TIME" + "\t" + "STATUS" );
+					
+					System.out.println("");
+					
+					System.out.println( ename + "\t\t" + strworkerloginDate
 							+ "\t" + shifttime + "\t" + shiftstatus );				
 				}
 				
-				System.out.println("=====================================");
+				System.out.println("==========================================================");
 				Display d23 = new  Display();
 				d23.workerScreen();
 			}

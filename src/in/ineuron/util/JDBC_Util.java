@@ -18,14 +18,14 @@ public class JDBC_Util
 		// Step1: loading and register the Driver
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			System.out.println(" JDBC_Util class is loading.....");
+			//System.out.println(" JDBC_Util class is loading.....");
 		} catch (ClassNotFoundException ce) {
 			ce.printStackTrace();
 		}
 	}
 	private JDBC_Util() 
 	{
-		System.out.println("Constructor is called.....");
+		//System.out.println("Constructor is called.....");
 	}
 	
 	public static Connection getJDBCConnection() throws IOException
@@ -35,7 +35,7 @@ public class JDBC_Util
     	try
     	{
     	Properties properties=new Properties();
-    	FileInputStream fis=new FileInputStream("C:\\Users\\Sid\\Desktop\\Java_learning\\GitRepos\\IneuronAssignments\\Employee_Tracking_Application_In_Java\\application.properties");
+    	FileInputStream fis=new FileInputStream("I:\\ineuronProject\\ETSProject\\Employee_Tracking_Application_In_Java\\application.properties");
     	properties.load(fis);
     
     	
@@ -45,7 +45,7 @@ public class JDBC_Util
     	
 		// Step2. Establish the Connection
 		conn = DriverManager.getConnection(url, userName, passWord);
-		System.out.println(" CONNECTION object created...connection established succesfully...");
+		//System.out.println(" CONNECTION object created...connection established succesfully...");
 		if(conn!=null)
 			{
 				return conn;
@@ -64,7 +64,7 @@ public class JDBC_Util
 			{
      		try {
 					resultset.close();
-					System.out.println("resultset closed succesfully...");					
+					//System.out.println("resultset closed succesfully...");					
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}  
@@ -73,7 +73,7 @@ public class JDBC_Util
 			{
      		try {
      			stmt.close();
-     			System.out.println("Statement closed succesfully...");
+     			//System.out.println("Statement closed succesfully...");
 				} catch (SQLException e) {	
 					e.printStackTrace();
 				}  
@@ -82,7 +82,7 @@ public class JDBC_Util
 			{
      		try {
 					pstmt.close();
-					System.out.println("PreparedStatement closed succesfully...");
+					//System.out.println("PreparedStatement closed succesfully...");
 				} catch (SQLException e) {
 				
 					e.printStackTrace();
@@ -93,7 +93,7 @@ public class JDBC_Util
               try 
      		   {
 				     conn.close();
-				     System.out.println("connection closed succesfully...");
+				    // System.out.println("connection closed succesfully...");
 				} 
      		    catch (SQLException e)
      		    {
