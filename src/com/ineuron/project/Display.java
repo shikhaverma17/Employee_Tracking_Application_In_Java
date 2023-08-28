@@ -91,11 +91,12 @@ public class Display
 			Integer choiceFromManager = null;
 			System.out.println("=========================================================================================");
 			System.out.println("please enter what you want to do from below options: - \n"
-					+ " enter : 1 for show all employee \n"
+					+ " enter : 1 for show all employee \n"					
 					+ " enter : 2 for accept or reject worker shift status. \n"
 					+ " enter : 3 set the department and project names assigned to employees and assign number of teamamtes. \n"
 					+ " enter : 4 for go to home screen menu. \n"
-					+ " enter : 5 for exit application!  \n");
+					+ " enter : 5 for exit application!  \n"
+					+ " enter : 6 Register a new employee. \n");
 			System.out.println("=========================================================================================");
 			choiceFromManager = scan.nextInt();
 
@@ -104,9 +105,7 @@ public class Display
 				System.out.println("Selected option 1 !");
 				Manager m123 = new Manager();
 				m123.showAllEmp();
-				//			System.out.println("please enter 1 or 2 below options to show all employee: - \n"
-				//					+ " enter : 1 for show all employee date wise  \n"
-				//					+ " enter : 2 for show all employee \n");
+				
 
 			}
 			else if(choiceFromManager == 2)
@@ -194,6 +193,12 @@ public class Display
 				Display d123 = new Display();
 				d123.exitScreen();
 			}
+			else if(choiceFromManager == 6)
+			{
+				System.out.println("Selected to register new employee!");
+				Employee emp012341 = new Employee();
+				emp012341.registerEmployee();
+			}
 			else
 			{
 				System.out.println("please enter valid option");
@@ -247,7 +252,7 @@ public class Display
 		else if(choiceFromWorker == 2)
 		{
 			Employee empZ123567 = new Employee();
-			Worker w12377 = new  Worker();
+			Worker worker1 = new  Worker();
 
 			System.out.println(" option 2 selected ");
 			System.out.println("");
@@ -261,14 +266,19 @@ public class Display
 				//System.out.println("Worker emp id is :" +workerEmpId123);
 				
 				System.out.print("Enter the login date in (MM-dd-yyyy) format :: ");
-				String workerloginDate = scan1122.nextLine();
-				
+				String workerloginDate = scan1122.nextLine();								
+				if(workerloginDate.matches("^[0-1][0-9][-][0-3][0-9][-][2][0-9][0-9][0-9]"))
+				{
+					worker1.setLoginDate(workerloginDate);					
+				}
+				else
+				{
+					System.out.println("\n Invalid date format: please type date correctly in 20th century!! ");
+					Display displayNewWorkerScreen123 = new Display();
+					displayNewWorkerScreen123.workerScreen();
+				}				
 				System.out.print("Enter the shift time in (HH:MM:SS) format :: ");
 				String workerShiftime = scan1122.nextLine();
-				
-				Worker worker1 = new  Worker();
-				
-				worker1.setLoginDate(workerloginDate);
 				worker1.setShift_time(workerShiftime);
 				
 				Worker w12344 = new  Worker();
